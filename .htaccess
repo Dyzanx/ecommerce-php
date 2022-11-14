@@ -1,0 +1,6 @@
+<IfModule mod_rewite.c>
+    Options +FollowSymlinks
+    RewriteEngine on
+
+    RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
+</IfModule>
