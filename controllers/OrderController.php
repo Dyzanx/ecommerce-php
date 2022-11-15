@@ -67,9 +67,38 @@
         }
 
         function confirm(){
-            require_once 'views/order/confirmed.php';
+            if(isset($_SESSION['user'])){
+                $order = new Order();
+                $order->setUser_id($_SESSION['user']->id);
+                $order = $order->getOneByUser();
+
+                $order_products = new Order();
+                $products = $order_products->getProductsByOrder($order->id);
+            }
+            require_once 'views/order/confirm.php'; 
         }
         
+        function myOrders(){
+            utils::isLogged();
+            $order = new order();
+            $order->setUser_id($_SESSION['user']->id);
+            $orders = $order->getAllByUser();
+
+            require_once 'views/order/myOrders.php';
+        }
+
+        function details(){
+            utils::isLogged();
+            if(isset($_GET['id']) && !empty($_GET['id'])){
+                $order = new order();
+                $order->setId($_GET['id']);
+                $order = $order->getOne();
+
+                require_once('views/order/details.php');
+            }else{
+                header("Location: ".base_url."?controller=order&action=myOrders");
+            }
+        }
     }
     
 ?>

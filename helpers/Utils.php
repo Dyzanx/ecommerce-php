@@ -18,6 +18,14 @@
             }
         }
 
+        public static function isLogged(){
+            if(isset($_SESSION['user']) && !empty($_SESSION['user'])){
+                return true;
+            }else{
+                header("Location: ".base_url."?controller=product&action=index");
+            }
+        }
+
         public static function getCategories(){
             require_once 'models/Category.php';
             $category = new category();

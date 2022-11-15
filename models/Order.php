@@ -225,6 +225,28 @@
             return $order->fetch_object();
         }
 
+        function getOneByUser(){
+            $id = $this->getUser_id();
+            $sql = "SELECT o.id, o.cost FROM orders o ".
+                    "WHERE o.user_id = $id ORDER BY id DESC LIMIT 1";
+            $order = $this->db->query($sql);
+    
+            return $order->fetch_object();
+        }
+
+        function getProductsByOrder($id){
+        //     $sql = "SELECT * FROM products WHERE id IN ".
+        //         "(SELECT product_id FROM lines_orders WHERE order_id = $id)";
+        
+            $sql = "SELECT pr.*, lo.units FROM products pr ".
+                "iNNER JOIN lines_orders lo ON pr.id = lo.product_id ".
+                "WHERE order_id = $id";
+
+            $products = $this->db->query($sql);
+    
+            return $products;
+        }
+
         function save_lines_orders(){
             $result = false;
             $sql = "SELECT LAST_INSERT_ID() as 'pedido'";
@@ -243,6 +265,14 @@
 
         function confirm(){
             require_once 'views/order/confirmed.php';
+        }
+
+        function getAllByUser(){
+            $id = $this->getUser_id();
+            $sql = "SELECT o.* FROM orders o ".
+                "WHERE o.user_id = $id ORDER BY id DESC";
+            $order = $this->db->query($sql);
+            return $order;
         }
     }
 ?>

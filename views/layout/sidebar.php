@@ -29,13 +29,13 @@
         <?php else: ?>
         <h3>Bienvenido, <?= $_SESSION['user']->name ?> <?= $_SESSION['user']->surname ?> </h3>
         <ul>
-            <li><a href="<?=base_url?>?controller=user&action=edit">Mis datos</a></li>
-            <li><a href="">Mis pedidos</a></li>
             <?php if($_SESSION['user']->rol == 'admin'): ?>
-            <li><a href="<?=base_url?>?controller=order&action=gestion">Gestionar pedidos</a></li>
-            <li><a href="<?=base_url?>?controller=product&action=gestion">Gestionar productos</a></li>
-            <li><a href="<?=base_url?>?controller=category&action=index">Gestionar categorias</a></li>
+                <li><a href="<?=base_url?>?controller=order&action=gestion">Gestionar pedidos</a></li>
+                <li><a href="<?=base_url?>?controller=product&action=gestion">Gestionar productos</a></li>
+                <li><a href="<?=base_url?>?controller=category&action=index">Gestionar categorias</a></li>
             <?php endif; ?>
+            <li><a href="<?=base_url?>?controller=user&action=edit">Mis datos</a></li>
+            <li><a href="<?=base_url?>?controller=order&action=myOrders">Mis pedidos</a></li>
             <li><a href="<?=base_url?>?controller=user&action=logout">Cerrar sesión</a></li>
         </ul>
         <?php endif; ?>
