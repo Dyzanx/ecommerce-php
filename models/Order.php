@@ -274,5 +274,13 @@
             $order = $this->db->query($sql);
             return $order;
         }
+
+        function updateStatus(){
+            $id = $this->getId();
+            $status = $this->getStatus();
+            $sql = "UPDATE orders SET status = '$status' WHERE id = $id";
+            $query = $this->db->query($sql);
+            return $query;
+        }
     }
 ?>

@@ -181,7 +181,7 @@
         }
 
         function getRandom($limit){
-                $products = $this->db->query("SELECT * FROM products ORDER BY RAND() LIMIT $limit");
+                $products = $this->db->query("SELECT * FROM products WHERE stock > 0 ORDER BY RAND() LIMIT $limit");
                 return $products;
             }
 

@@ -40,8 +40,34 @@
             header("Location: ".base_url."?controller=cart&action=index");
         }
 
-        function removeFromCart(){
-            
+        function deleteProduct(){
+            if(isset($_GET['index']) && !empty($_GET['index'])){
+                $index = $_GET['index'];
+                $_SESSION['cart'][$index] = null;
+                unset($_SESSION['cart'][$index]);
+            }
+            header("Location: ".base_url."?controller=cart&action=index");
+        }
+
+        function up(){
+            if(isset($_GET['index'])){
+                $index = $_GET['index'];
+                $_SESSION['cart'][$index]['units']++;
+            }
+            header("Location: ".base_url."?controller=cart&action=index");
+        }
+
+        function down(){
+            if(isset($_GET['index'])){
+                $index = $_GET['index'];
+                $_SESSION['cart'][$index]['units']--;
+                
+                if($_SESSION['cart'][$index]['units'] == 0){
+                    $_SESSION['cart'][$index] = null;
+                    unset($_SESSION['cart'][$index]);
+                }
+            }
+            header("Location: ".base_url."?controller=cart&action=index");
         }
 
         function deleteCart(){

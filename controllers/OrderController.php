@@ -43,14 +43,6 @@
             header("Location: ".base_url."?controller=order&action=confirm");
         }
 
-        function gestion(){
-            utils::isAdmin();
-            $orders = new order();
-            $orders = $orders->getAll();
-
-            require_once 'views/order/gestion.php';
-        }
-
         function edit(){
             utils::isAdmin();
             if(isset($_GET['id']) && !empty($_GET['id'])){
@@ -94,9 +86,38 @@
                 $order->setId($_GET['id']);
                 $order = $order->getOne();
 
+                // get products
+                $order_products = new Order();
+                $products = $order_products->getProductsByOrder($order->id);                
+
                 require_once('views/order/details.php');
             }else{
                 header("Location: ".base_url."?controller=order&action=myOrders");
+            }
+        }
+
+        function gestion(){
+            utils::isAdmin();
+            $gestion = true;
+            $orders = new order();
+            $orders = $orders->getAll();
+
+            require_once 'views/order/myOrders.php';
+        }
+
+
+        function changeStatus(){
+            utils::isAdmin();
+            $gestion = true;
+            if(isset($_POST['orderStatus']) && isset($_POST['orderId'])){
+                $order = new order();
+                $order->setId($_POST['orderId']);
+                $order->setStatus($_POST['orderStatus']);
+                $order->updateStatus();
+
+                header("Location: ".base_url."?controller=order&action=details&id=".$_POST['orderId']);
+            }else{
+                header("Location: ".base_url."?controller=product&action=index");
             }
         }
     }

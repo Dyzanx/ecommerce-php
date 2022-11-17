@@ -197,6 +197,23 @@ button, .button{
     background-color: #911515;
     border: 1px solid #911515;
 }
+.options-car-button{
+    display: inline-block;
+    padding: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.button-yellow{
+    color: black !important;
+    background-color: #ffff36;
+    border: 1px solid #ffff36;
+}
+.button-yellow:hover{
+    color: black !important;
+    background-color: #c4c45f;
+    border: 1px solid #c4c45f;
+}
+
 .button-small{
     width: fit-content;
     text-align: center;
@@ -343,6 +360,9 @@ th{
 
 
 /* CART styles */
+.cart-options-container{
+    margin-top: 10px;
+}
 .cart-stats-container{
     margin-top: 20px;
     width: 30%;
@@ -364,6 +384,16 @@ th{
 
 .order-details{
     margin: 20px;
+}
+.order-details form{
+    margin-bottom: 20px;
+}
+.order-details .lists-container{
+    border: 1px solid red;
+    width: fit-content;
+}
+.order-details ol{
+    margin-bottom: 10px;
 }
 .order-details-text{
     margin-bottom: 10px;

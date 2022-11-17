@@ -50,5 +50,19 @@
 
             return $stats;
         }
+
+        public static function showStatus($status){
+            if($status == "confirmed"){
+                return 'Pendiente';
+            }else if($status == 'in preparation'){
+                return 'En preparacion';
+            }else if($status == 'ready'){
+                return 'Preparado para enviar';
+            }else if($status == 'send'){
+                return 'Enviado';
+            }else if($status == 'En espera...'){
+                return 'En espera de pago';
+            }
+        }
     }
 ?>  
