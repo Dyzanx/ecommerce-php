@@ -1,19 +1,19 @@
 <h1>Informacion de usuario</h1>
 
-<?php if(isset($_SESSION['update']) && $_SESSION['update'] == 'completed'): ?>
+<?php if (isset($_SESSION['update']) && $_SESSION['update'] == 'completed') : ?>
     <div class="alert">
         Datos cambiados correctamente
     </div>
-<?php elseif(isset($_SESSION['update']) && $_SESSION['update'] == 'failed'): ?>
+<?php elseif (isset($_SESSION['update']) && $_SESSION['update'] == 'failed') : ?>
     <div class="alert alert-error">
         Fallo al realizar el cambio, introduce datos validos para el cambio
     </div>
-<?php 
-    endif;
-    utils::deleteSession('update');
+<?php
+endif;
+utils::deleteSession('update');
 ?>
 
-<form action="<?=base_url?>?controller=user&action=update" method="post">
+<form action="<?= base_url ?>user/update" method="post">
     <label for="name">Nombre: </label>
     <input type="text" name="name" value="<?= $_SESSION['user']->name ?>" autocomplete="off">
 

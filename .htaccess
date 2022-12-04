@@ -1,6 +1,8 @@
-<IfModule mod_rewite.c>
-    Options +FollowSymlinks
-    RewriteEngine on
+Options +FollowSymlinks
+RewriteEngine on
+ErrorDocument 404 http://localhost/PHP/proyectos/ecommerce/product/index
 
-    RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2
-</IfModule>
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^(.*)/(.*) index.php?controller=$1&action=$2

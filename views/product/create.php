@@ -1,17 +1,17 @@
-<?php if($edit): ?>
+<?php if (isset($edit)) : ?>
     <h1>Editar el producto: <?= $product->name ?></h1>
 
     <div class="form-container">
-        <form action="<?=base_url?>?controller=product&action=update&id=<?= $_GET['id'] ?>" method="post" enctype="multipart/form-data">
+        <form action="<?= base_url ?>product/update&id=<?= $_GET['id'] ?>" method="post" enctype="multipart/form-data">
             <label for="category_id">Categoria: </label>
             <select name="category_id">
-                <?php 
+                <?php
                 $categories = utils::getCategories();
-                while($cat = $categories->fetch_object()): ?>
-                    <?php if($cat->id == $product->category_id): ?>
+                while ($cat = $categories->fetch_object()) : ?>
+                    <?php if ($cat->id == $product->category_id) : ?>
                         <option value="<?= $cat->id ?>" selected><?= $cat->name ?></option>
                     <?php endif; ?>
-                    <?php if($cat->id != $product->category_id): ?>
+                    <?php if ($cat->id != $product->category_id) : ?>
                         <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
                     <?php endif; ?>
                 <?php endwhile; ?>
@@ -31,25 +31,25 @@
 
             <label for="image">Imagen (png, jpg, jpeg): </label>
             <input type="file" name="image" autocomplete="off">
-            <?php if(isset($product->image) && !empty($product->image)): ?>
-                <img src="<?=base_url?>uploads/images/<?=$product->image?>" alt="<?= $product->image ?>" class="small-image">
+            <?php if (isset($product->image) && !empty($product->image)) : ?>
+                <img src="<?= base_url ?>uploads/images/<?= $product->image ?>" alt="<?= $product->image ?>" class="small-image">
             <?php endif; ?>
 
             <input type="submit" value="Actualizar información">
         </form>
     </div>
 
-<?php else: ?>
+<?php else : ?>
 
     <h1>Agregar nuevos productos a la tienda</h1>
 
     <div class="form-container">
-        <form action="<?=base_url?>?controller=product&action=save" method="post" enctype="multipart/form-data">
+        <form action="<?= base_url ?>product/save" method="post" enctype="multipart/form-data">
             <label for="category_id">Categoria: </label>
             <select name="category_id">
-                <?php 
-                    $categories = utils::getCategories();
-                    while($cat = $categories->fetch_object()):
+                <?php
+                $categories = utils::getCategories();
+                while ($cat = $categories->fetch_object()) :
                 ?>
                     <option value="<?= $cat->id ?>"><?= $cat->name ?></option>
                 <?php endwhile; ?>
